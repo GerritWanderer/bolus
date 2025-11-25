@@ -28,5 +28,5 @@ export async function getPostCategories() {
 			categories.push(metadata.category);
 		}
 	}
-	return categories;
+	return [...new Set(categories)];
 }
