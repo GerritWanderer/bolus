@@ -2,6 +2,9 @@
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
 	import { AccordionItem, Accordion } from 'flowbite-svelte';
 	import { Badge, P } from 'flowbite-svelte';
+
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
 </script>
 
 <Navbar>
@@ -10,11 +13,9 @@
 	</NavBrand>
 	<NavHamburger />
 	<NavUl>
-		<NavLi href="/">Home</NavLi>
-		<NavLi href="/about">About</NavLi>
-		<NavLi href="/docs/components/navbar">Navbar</NavLi>
-		<NavLi href="/pricing">Pricing</NavLi>
-		<NavLi href="/contact">Contact</NavLi>
+		{#each data.categories as category}
+			<NavLi href="/">{category}</NavLi>
+		{/each}
 	</NavUl>
 </Navbar>
 
