@@ -1,6 +1,6 @@
 ---
 title: Brötchen Süß
-unit: Brötchen
+unit: Brötchen (60g)
 content: 4
 category: Frühstück
 quantities:

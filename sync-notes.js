@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readdir, readFile, writeFile, mkdir } from 'fs/promises';
+import { readdir, readFile, writeFile, mkdir, unlink } from 'fs/promises';
 import { join, basename } from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -120,6 +120,35 @@ async function syncNotes() {
 
 		console.log(`Found ${markdownFiles.length} markdown file(s)\n`);
 
+		// Get existing files in target directory
+		let targetFiles = [];
+		try {
+			targetFiles = await readdir(TARGET_DIR);
+			targetFiles = targetFiles.filter((file) => file.endsWith('.md'));
+		} catch (err) {
+			// Target directory doesn't exist yet, that's okay
+			targetFiles = [];
+		}
+
+		// Find files to remove (exist in target but not in source)
+		const filesToRemove = targetFiles.filter((file) => !markdownFiles.includes(file));
+		let removedCount = 0;
+
+		if (filesToRemove.length > 0) {
+			console.log(`🗑️  Removing ${filesToRemove.length} deleted file(s):\n`);
+			for (const file of filesToRemove) {
+				const targetPath = join(TARGET_DIR, file);
+				try {
+					await unlink(targetPath);
+					console.log(`🗑️  ${file}`);
+					removedCount++;
+				} catch (err) {
+					console.error(`❌ Failed to remove ${file}: ${err.message}`);
+				}
+			}
+			console.log('');
+		}
+
 		let syncedCount = 0;
 		let skippedCount = 0;
 
@@ -154,6 +183,9 @@ async function syncNotes() {
 
 		console.log(`\n📊 Summary:`);
 		console.log(`   Synced: ${syncedCount}`);
+		if (removedCount > 0) {
+			console.log(`   Removed: ${removedCount}`);
+		}
 		if (skippedCount > 0) {
 			console.log(`   Skipped: ${skippedCount}`);
 		}

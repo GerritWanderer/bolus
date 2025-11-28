@@ -1,6 +1,6 @@
 ---
 title: Brötchen Herzhaft
-unit: Brötchen
+unit: Brötchen (60g)
 content: 3
 category: Frühstück
 quantities:

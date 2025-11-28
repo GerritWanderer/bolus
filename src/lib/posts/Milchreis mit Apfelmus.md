@@ -9,4 +9,5 @@ quantities:
   - "1.5"
 ---
 
-Kann variieren je nach obst
+220g Milchreis auf 1L Milch gesamt 180g KH
+1KE Apfelmark pro Teller
