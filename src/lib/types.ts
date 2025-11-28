@@ -4,4 +4,5 @@ export interface Post {
 	content: string;
 	category: string;
 	quantities: string[];
+	body?: string;
 }
