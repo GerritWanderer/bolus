@@ -7,5 +7,6 @@ quantities:
   - "0.5"
   - "1"
   - "1.5"
+verified: true
 ---
 

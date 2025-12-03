@@ -1,7 +1,7 @@
 ---
-title: Crepes mit Apfelmus
+title: Crepes mit Apfelmus (85g)
 unit: Crepes
-content: 4
+content: 2.3
 category: Mahlzeit
 quantities:
   - "1"
